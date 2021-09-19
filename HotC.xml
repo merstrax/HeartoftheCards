@@ -1,0 +1,85 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+	<Script file=""/>
+
+	<GameTooltip name="HotCTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true"/>
+
+	<Button name="SpellButton" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Icon" parentKey="icon">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+            <OnLoad>
+                this:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+            </OnLoad>
+			<OnEnter>
+				HotCTooltip:SetOwner(self, "ANCHOR_RIGHT");
+				HotCTooltip:SetHyperlink("spell:"..this.link);
+				HotCTooltip:AddLine(" ");
+				HotCTooltip:AddLine("Requires Level: "..this.level);
+				HotCTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				HotCTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+
+	<Frame name="HotC_Main" parent="UIParent" hidden="false">
+		<Size>
+			<AbsDimension x="650" y="510"/>
+		</Size>
+		<Anchors>
+ 			<Anchor point="CENTER"/>
+ 		</Anchors>
+		 <Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
+			<EdgeSize>
+				<AbsValue val="14"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="30"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="4" right="5" top="5" bottom="4"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+            <Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-5" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="$parent_TalentFrame" hidden="false" parentKey="talentframe">
+				<Size>
+					<AbsDimension x="325" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>

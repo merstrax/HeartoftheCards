@@ -1,0 +1,14 @@
+## Interface: 30300
+## Title: Heart of the Cards
+## Notes: Keep track of Skill Cards accross characters
+## Author: Rvng
+## Version: 1.0
+## DefaultState: enabled
+
+## SavedVariables: HotcDB
+
+Tables\ClassDB.lua
+
+
+HotC.xml
+HotC.lua
