@@ -21,7 +21,7 @@
 					</Anchors>
 				</Texture>
 			</Layer>
-			<Layer level="ARTWORK">
+			<Layer level="BORDER">
 				<Texture name="$parentIcon" parentKey="icon">
 					<Size>
 						<AbsDimension x="32" y="32"/>
@@ -246,7 +246,7 @@
 					<Anchors>
 						<Anchor point="RIGHT" relativeTo="$parentRight">
 							<Offset>
-								<AbsDimension x="-43" y="2"/>
+								<AbsDimension x="-25" y="2"/>
 							</Offset>
 						</Anchor>
 					</Anchors>

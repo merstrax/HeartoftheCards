@@ -58,116 +58,59 @@ function OnLoad(frame)
 end
 
 function BuildFrame(frame)
-		
-		local titlebg = frame:CreateTexture(nil, "BORDER")
-		titlebg:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-Title-Background")
-		titlebg:SetPoint("TOPLEFT", 9, -6)
-		titlebg:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", -28, -24)
+	local window = frame;
 
-		local dialogbg = frame:CreateTexture(nil, "BACKGROUND")
-		dialogbg:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-CharacterTab-L1")
-		dialogbg:SetPoint("TOPLEFT", 8, -12)
-		dialogbg:SetPoint("BOTTOMRIGHT", -6, 8)
-		dialogbg:SetTexCoord(0.255, 1, 0.29, 1)
-		--[[
-		local topleft = frame:CreateTexture(nil, "BORDER")
-		topleft:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-TopLeft")
-		topleft:SetWidth(64)
-		topleft:SetHeight(64)
-		topleft:SetPoint("TOPLEFT")
-		--topleft:SetTexCoord(0.501953125, 0.625, 0, 1)
+	local titlebg = window:CreateTexture(nil, "BORDER")
+	titlebg:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-Title-Background")
+	titlebg:SetPoint("TOPLEFT", 9, -6)
+	titlebg:SetPoint("BOTTOMRIGHT", window, "TOPRIGHT", -28, -24)
 
-		local topright = frame:CreateTexture(nil, "BORDER")
-		topleft:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-TopRight")
-		topright:SetWidth(64)
-		topright:SetHeight(64)
-		topright:SetPoint("TOPRIGHT")
-		--topright:SetTexCoord(0.625, 0.75, 0, 1)
+	local dialogbg = window:CreateTexture(nil, "BACKGROUND")
+	dialogbg:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-CharacterTab-L1")
+	dialogbg:SetPoint("TOPLEFT", 8, -12)
+	dialogbg:SetPoint("BOTTOMRIGHT", -6, 8)
+	dialogbg:SetTexCoord(0.255, 1, 0.29, 1)
 
-		
-		local top = frame:CreateTexture(nil, "BORDER")
-		top:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-Border")
-		top:SetHeight(64)
-		top:SetPoint("TOPLEFT", topleft, "TOPRIGHT")
-		top:SetPoint("TOPRIGHT", topright, "TOPLEFT")
-		top:SetTexCoord(0.25, 0.369140625, 0, 1)
-		
-		local bottomleft = frame:CreateTexture(nil, "BORDER")
-		topleft:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomLeft")
-		bottomleft:SetWidth(64)
-		bottomleft:SetHeight(64)
-		bottomleft:SetPoint("BOTTOMLEFT")
-		--bottomleft:SetTexCoord(0.751953125, 0.875, 0, 1)
-
-		local bottomright = frame:CreateTexture(nil, "BORDER")
-		topleft:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomRight")
-		bottomright:SetWidth(64)
-		bottomright:SetHeight(64)
-		bottomright:SetPoint("BOTTOMRIGHT")
-		--bottomright:SetTexCoord(0.875, 1, 0, 1)
-
-		
-		local bottom = frame:CreateTexture(nil, "BORDER")
-		bottom:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-Border")
-		bottom:SetHeight(64)
-		bottom:SetPoint("BOTTOMLEFT", bottomleft, "BOTTOMRIGHT")
-		bottom:SetPoint("BOTTOMRIGHT", bottomright, "BOTTOMLEFT")
-		bottom:SetTexCoord(0.376953125, 0.498046875, 0, 1)
-
-		local left = frame:CreateTexture(nil, "BORDER")
-		left:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-Border")
-		left:SetWidth(64)
-		left:SetPoint("TOPLEFT", topleft, "BOTTOMLEFT")
-		left:SetPoint("BOTTOMLEFT", bottomleft, "TOPLEFT")
-		left:SetTexCoord(0.001953125, 0.125, 0, 1)
-
-		local right = frame:CreateTexture(nil, "BORDER")
-		right:SetTexture("Interface\\PaperDollInfoFrame\\UI-GearManager-Border")
-		right:SetWidth(64)
-		right:SetPoint("TOPRIGHT", topright, "BOTTOMRIGHT")
-		right:SetPoint("BOTTOMRIGHT", bottomright, "TOPRIGHT")
-		right:SetTexCoord(0.1171875, 0.2421875, 0, 1)
-		]]--
-
-
-		local dropDown = CreateFrame("Frame", "SpecSelect", HotCMainFrame.viewFrame.classFrame.navBar , "HotCDropDownMenuTemplate")
-		dropDown:SetPoint("LEFT", 0, 0)
-		
-		UIDropDownMenu_SetWidth(dropDown, 135) -- Use in place of dropDown:SetWidth
-
-		-- Bind an initializer function to the dropdown; see previous sections for initializer function examples.
-		UIDropDownMenu_Initialize(dropDown, function(self, level, menuList)
-			local info = UIDropDownMenu_CreateInfo()
-			if (level or 1) == 1 then
-			 	-- Display Class Options
-				for i = 1, 9 do
-					info.text, info.checked = SpecTable[i][1], classSelected == SpecTable[i][1]
-					info.menuList, info.hasArrow = i, true
-					UIDropDownMenu_AddButton(info)
-				end
-		   
-			else
-			 	-- Display a nested group of 10 favorite number options
-				info.func = self.SetSpec
-				for i = 1, 3 do
-					info.text, info.arg1, info.arg2, info.checked = SpecTable[menuList][2][i], SpecTable[menuList][1], SpecTable[menuList][2][i], SpecTable[menuList][2][i] == specSelected
-					UIDropDownMenu_AddButton(info, level)
-				end
+	local dropDown = CreateFrame("Frame", "SpecSelect", HotCMainFrame.viewFrame.classFrame.navBar , "HotCDropDownMenuTemplate")
+	dropDown:SetPoint("LEFT", -10, -2)
+	
+	UIDropDownMenu_SetWidth(dropDown, 135) -- Use in place of dropDown:SetWidth
+	UIDropDownMenu_SetText(dropDown, "Select Class and Spec")
+	-- Bind an initializer function to the dropdown; see previous sections for initializer function examples.
+	UIDropDownMenu_Initialize(dropDown, function(self, level, menuList)
+		local info = UIDropDownMenu_CreateInfo()
+		if (level or 1) == 1 then
+			-- Display Class Options
+			for i = 1, 9 do
+				info.text = SpecTable[i][1]
+				info.menuList, info.hasArrow = i, true
+				UIDropDownMenu_AddButton(info)
 			end
-		end)
-
-		function dropDown:SetSpec(class, spec)
-			classSelected = class;
-			specSelected = spec;
 		
-			ShowTalentsForSpec(class, spec);
-			
-			-- Update the text; if we merely wanted it to display newValue, we would not need to do this
-			UIDropDownMenu_SetText(dropDown, specSelected)
-			-- Because this is called from a sub-menu, only that menu level is closed by default.
-			-- Close the entire menu with this next call
-			CloseDropDownMenus()
+		else
+			-- Display a nested group of 10 favorite number options
+			info.func = self.SetSpec
+			for i = 1, 3 do
+				info.text, info.arg1, info.arg2, info.checked = SpecTable[menuList][2][i], SpecTable[menuList][1], SpecTable[menuList][2][i], SpecTable[menuList][2][i] == specSelected
+				UIDropDownMenu_AddButton(info, level)
+			end
 		end
+	end)
+
+	function dropDown:SetSpec(class, spec)
+		classSelected = class;
+		specSelected = spec;
+	
+		ShowTalentsForSpec(class, spec);
+		
+		-- Update the text; if we merely wanted it to display newValue, we would not need to do this
+		
+		-- Because this is called from a sub-menu, only that menu level is closed by default.
+		-- Close the entire menu with this next call
+		CloseDropDownMenus()
+	end
+
+	SpellFrame.bg:SetTexture()
 end
 
 function InitDB()
@@ -247,6 +190,14 @@ function ShowSpellsForSpec()
 end
 
 function ShowTalentsForSpec(class, spec)
+	--Set Background for spec
+	local file = Class_DB[class][spec].File;
+	local frame = "HotCTalentFrameBackground";
+	_G[frame.."TopLeft"]:SetTexture(file.."-TopLeft")
+	_G[frame.."TopRight"]:SetTexture(file.."-TopRight")
+	_G[frame.."BottomLeft"]:SetTexture(file.."-BottomLeft")
+	_G[frame.."BottomRight"]:SetTexture(file.."-BottomRight")
+
 	--Hide all talent buttons, will show appropriate ones later
 	for i = 1, MAX_TALENTS do 
 		TalentButtons[i]:Hide();
@@ -259,18 +210,8 @@ function ShowTalentsForSpec(class, spec)
 		local _, _, texture = GetSpellInfo(talent[3][1])
 		
 		local maxRank = #talent[3];
-		local showBadge = maxRank > 1;
 
 		TalentButtons[talent_loc].maxRank = maxRank;
-
-		if not showBadge then
-			TalentButtons[talent_loc].badge:Hide()
-			TalentButtons[talent_loc].rank:Hide()
-		else
-			TalentButtons[talent_loc].badge:Show()
-			TalentButtons[talent_loc].rank:Show()
-		end
-
 
 		TalentButtons[talent_loc].curRank = 0;
 
@@ -316,6 +257,7 @@ function UpdateTalentButton(button, arg)
 	if arg == "LeftButton" and (Talents.total + 1 < 51) then
 		if (button.curRank + 1 <= button.maxRank) then
 			Talents.total = Talents.total + 1;
+			TalentPointsText:SetText(Talents.total.."/51");
 			button.curRank = math.min(button.curRank + 1, button.maxRank)
 		else
 			return
@@ -323,6 +265,7 @@ function UpdateTalentButton(button, arg)
 	elseif arg == "RightButton" then
 		if not (button.curRank - 1 < 0) then
 			Talents.total = Talents.total - 1
+			TalentPointsText:SetText(Talents.total.."/51");
 			button.curRank = math.max( button.curRank - 1, 0);
 		else
 			return

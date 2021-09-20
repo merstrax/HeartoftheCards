@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
 
 	<Script file="HotC.lua"/>
-	<Include file="HotC_Template.xml">
+	<Include file="HotC_Template.xml" />
 
 	<GameTooltip name="HotCTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true"/>
 
@@ -24,50 +24,76 @@
 					</Anchors>
 				</FontString>
 			</Layer>
-			<Layer level="BACKGROUND">
-				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-TopLeft">
-					<Size>
-						<AbsDimension x="256" y="256"/>
-					</Size>
+			
+			<Layer level="BORDER">
+				<!--Top of Borderframe-->
+				<Texture name="$parentTopLeft" file="Interface\PaperDollInfoFrame\UI-GearManager-Border">
+					<Size x="64" y="28"/>
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
-							<Offset>
-								<AbsDimension x="2" y="-20"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" />
 					</Anchors>
+					<TexCoords left="0.501953125" right="0.625" top="0.0" bottom="0.4375"  />
 				</Texture>
-				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-TopRight">
-					<Size>
-						<AbsDimension x="128" y="256"/>
-					</Size>
+				<Texture name="$parentTopRight" file="Interface\PaperDollInfoFrame\UI-GearManager-Border">
+					<Size x="64" y="28"/>
 					<Anchors>
-						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
-							
-						</Anchor>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT" />
 					</Anchors>
+					<TexCoords left="0.625" right="0.75" top="0.0" bottom="0.4375"  />
 				</Texture>
-				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-BottomLeft">
-					<Size>
-						<AbsDimension x="256" y="256"/>
-					</Size>
+				<Texture name="$parentTop" file="Interface\PaperDollInfoFrame\UI-GearManager-Border">
+					<Size y="64"/>
 					<Anchors>
-						<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
-							
-						</Anchor>
+						<Anchor point="TOPRIGHT" relativeTo="$parentTopRight" relativePoint="TOPLEFT" />
+						<Anchor point="TOPLEFT" relativeTo="$parentTopLeft" relativePoint="TOPRIGHT" />
 					</Anchors>
+					<TexCoords left="0.25" right="0.369140625" top="0.0" bottom="1.0"  />
 				</Texture>
-				<Texture file="Interface\PaperDollInfoFrame\UI-Character-General-BottomRight">
-					<Size>
-						<AbsDimension x="128" y="256"/>
-					</Size>
+
+				<!--Bottom of Borderframe -->
+				<Texture name="$parentBottomLeft" file="Interface\PaperDollInfoFrame\UI-Character-General-BottomLeft">
+					<Size x="16" y="16"/>
 					<Anchors>
-						<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
-							
-						</Anchor>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="5"/>
 					</Anchors>
+					<TexCoords top="0.6523" bottom="0.7148" left="0.0430" right="0.1055"  />
 				</Texture>
-				</Layer>
+				<Texture name="$parentBottomRight" file="Interface\PaperDollInfoFrame\UI-Character-General-BottomRight">
+					<Size x="16" y="16" /> 
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="-2"/>
+					</Anchors>
+					<TexCoords top="0.6523" bottom="0.7148" left="0.6094" right="0.7344"  />			
+				</Texture>
+				<Texture name="$parentBottom" file="Interface\PaperDollInfoFrame\UI-Character-General-BottomRight">
+					<Size y="16" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBottomRight" relativePoint="BOTTOMLEFT" />
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBottomLeft" relativePoint="BOTTOMRIGHT" />
+					</Anchors>
+					<TexCoords top="0.6523" bottom="0.7148" left="0.0430" right="0.2930"  />			
+				</Texture>
+
+				<!--Sides of Borderframe-->
+				<Texture name="$parentLeft" file="Interface\PaperDollInfoFrame\UI-Character-General-BottomLeft">
+					<Size x="16" y="32" xoffset="4"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentTopLeft" relativePoint="BOTTOMLEFT" x="5" y="2"/>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBottomLeft" relativePoint="TOPLEFT" x="5"/>
+					</Anchors>
+					<TexCoords top="0.4523" bottom="0.5148" left="0.0430" right="0.1055"  />
+				</Texture>
+
+				<Texture name="$parentRight" file="Interface\PaperDollInfoFrame\UI-Character-General-BottomRight">
+					<Size x="16" y="16" /> 
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentTopRight" relativePoint="BOTTOMRIGHT" x="-2" y="2"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBottomRight" relativePoint="TOPRIGHT" x="-2"/>
+					</Anchors>
+					<TexCoords top="0.4523" bottom="0.5148" left="0.6094" right="0.7344"  />			
+				</Texture>
+			</Layer>
+				
 		</Layers>
 		<Frames>
             <Button name="$parentCloseButton" inherits="UIPanelCloseButton">
@@ -84,14 +110,14 @@
 				This is the View Frame. 
 				It contains all other frames that will be swappable through tabs 
 			-->
-			<Frame name="$parentViewFrame" hidden="false" parentKey="viewFrame">
+			<Frame name="$parentViewFrame" hidden="false" parentKey="viewFrame" enableMouse="true">
 				<Size>
 					<AbsDimension x="630" y="480"/>
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent">
 						<Offset>
-							<AbsDimension x="10" y="-40"/>
+							<AbsDimension x="10" y="-30"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -104,81 +130,43 @@
 						<Anchors>
 							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
 								<Offset>
-									<AbsDimension x="0" y="0"/>
+									<AbsDimension x="4" y="0"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-4" y="0"/>
 								</Offset>
 							</Anchor>
 						</Anchors>
 						<Frames>
-							<Frame name="$parentNavBar2" hidden="true">
-								<Size x="620" y="40"/>
+							<Frame name="$parentNavBar" hidden="false" parentKey="navBar">
+								<Size x="64" y="32" />
 								<Anchors>
-									<Anchor point="LEFT">
-										<Offset x="8" y="0"/>
+									<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+										<Offset>
+											<AbsDimension x="5" y="-5"/>
+										</Offset>
 									</Anchor>
-									<Anchor point="RIGHT">
-										<Offset x="-8" y="0"/>
-									</Anchor>
-									<Anchor point="TOP">
-										<Offset x="0" y="10"/>
+									<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+										<Offset>
+											<AbsDimension x="-5" y="-5"/>
+										</Offset>
 									</Anchor>
 								</Anchors>
-								<!--
+								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
+									<EdgeSize><AbsValue val="5"/></EdgeSize>
+									<TileSize><AbsValue val="5"/></TileSize>
+									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
+								</Backdrop>
 								<Layers>
 									<Layer level="BACKGROUND">
-										<Texture name="$parentBackground" file="Interface\Buttons\UI-Button-Borders2" setAllPoints="true">
-											<Size x="331" y="26"/>
-											<TexCoords left="0.0" right="0.646484375" top="0.2109375" bottom="0.4140625"/>
-										</Texture>
-									</Layer>
-									<Layer level="BORDER">
-										<Texture name="$parentBorderLeft" file="Interface\Buttons\UI-Button-Borders2">
-											<Size x="6" y="18"/>
-											<Anchors>
-												<Anchor point="LEFT">
-													<Offset x="4" y="0"/>
-												</Anchor>
-												<Anchor point="TOP">
-													<Offset x="0" y="-5"/>
-												</Anchor>
-												<Anchor point="BOTTOM">
-													<Offset x="0" y="5"/>
-												</Anchor>
-											</Anchors>
-											<TexCoords left="0.0" right="0.01171875" top="0.421875" bottom="0.5625"/>
-										</Texture>
-										<Texture name="$parentBorderRight" file="Interface\Buttons\UI-Button-Borders2">
-											<Size x="6" y="18"/>
-											<Anchors>
-												<Anchor point="RIGHT">
-													<Offset x="-4" y="0"/>
-												</Anchor>
-												<Anchor point="TOP">
-													<Offset x="0" y="-5"/>
-												</Anchor>
-												<Anchor point="BOTTOM">
-													<Offset x="0" y="5"/>
-												</Anchor>
-											</Anchors>
-											<TexCoords left="0.3046875" right="0.31640625" top="0.421875" bottom="0.5625"/>
-										</Texture>
-										<Texture name="$parentBorderMiddle" file="Interface\Buttons\UI-Button-Borders2">
-											<Anchors>
-												<Anchor point="TOPLEFT" relativeTo="$parentBorderLeft" relativePoint="TOPRIGHT"/>
-												<Anchor point="BOTTOMRIGHT" relativeTo="$parentBorderRight" relativePoint="BOTTOMLEFT"/>
-											</Anchors>
-											<TexCoords left="0.01171875" right="0.3046875" top="0.421875" bottom="0.5625"/>
+										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
+											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" x="0" y="0"/></Anchors>
 										</Texture>
 									</Layer>
 									<Layer level="ARTWORK">
-										<FontString name="$parentSpentPointsText" inherits="GameFontNormalSmall" justifyH="LEFT" text="10">
-											<Size x="0" y="15"/>
-											<Anchors>
-												<Anchor point="LEFT">
-													<Offset x="12" y="1"/>
-												</Anchor>
-											</Anchors>
-										</FontString>
-										<FontString name="$parentTalentPointsText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="51">
+										<FontString name="TalentPointsText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="0/51">
 											<Size x="0" y="15"/>
 											<Anchors>
 												<Anchor point="RIGHT">
@@ -186,40 +174,25 @@
 												</Anchor>
 											</Anchors>
 										</FontString>
-									</Layer>
-								</Layers>
-								-->
-							</Frame>
-							<Frame name="$parentNavBar" hidden="false" parentKey="navBar">
-								<Size x="620" y="40" />
-								<Anchors>
-									<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
-										<Offset>
-											<AbsDimension x="5" y="0"/>
-										</Offset>
-									</Anchor>
-								</Anchors>
-								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
-									<EdgeSize><AbsValue val="5"/></EdgeSize>
-									<TileSize><AbsValue val="5"/></TileSize>
-									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
-								</Backdrop>
-								<Layers>
-									<Layer level="BACKGROUND">
-										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
-											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" x="0" y="0"/></Anchors>
-										</Texture>
+										<FontString name="TalentSpentText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="TE:">
+											<Size x="0" y="15"/>
+											<Anchors>
+												<Anchor point="RIGHT" >
+													<Offset x="-45" y="1"/>
+												</Anchor>
+											</Anchors>
+										</FontString>
 									</Layer>
 								</Layers>
 							</Frame>
-							<Frame name="$parentSpellFrame" hidden="false" parentKey="spellFrame">
+							<Frame name="SpellFrame" hidden="false" parentKey="spellFrame">
 								<Size>
-									<AbsDimension x="300" y="430"/>
+									<AbsDimension x="300" y="435"/>
 								</Size>
 								<Anchors>
 									<Anchor point="TOPLEFT" relativeTo="$parentNavBar" relativePoint="BOTTOMLEFT">
 										<Offset>
-											<AbsDimension x="0" y="-5"/>
+											<AbsDimension x="0" y="-10"/>
 										</Offset>
 									</Anchor>
 								</Anchors>
@@ -230,20 +203,25 @@
 								</Backdrop>
 								<Layers>
 									<Layer level="BACKGROUND">
-										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
-											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" x="0" y="0"/></Anchors>
+										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Paper" parentKey="bg">
+											<Size x="392" y="495" />
+											<Anchors>
+												<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+													<AbsDimension x="0" y="-5"/>
+												</Anchor>
+											</Anchors>
 										</Texture>
 									</Layer>
 								</Layers>
 							</Frame>
 							<Frame name="$parentTalentFrame" hidden="false" parentKey="talentFrame">
 								<Size>
-									<AbsDimension x="300" y="430"/>
+									<AbsDimension x="300" y="435"/>
 								</Size>
 								<Anchors>
 									<Anchor point="TOPRIGHT" relativeTo="$parentNavBar" relativePoint="BOTTOMRIGHT">
 										<Offset>
-											<AbsDimension x="0" y="-5"/>
+											<AbsDimension x="0" y="-10"/>
 										</Offset>
 									</Anchor>
 								</Anchors>
@@ -255,7 +233,44 @@
 								<Layers>
 									<Layer level="BACKGROUND">
 										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
-											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" x="0" y="0"/></Anchors>
+											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0"/></Anchors>
+										</Texture>
+										<Texture name="HotCTalentFrameBackgroundTopLeft">
+											<Size x="256" y="256"/>
+											<Anchors>
+												<Anchor point="TOPLEFT"/>
+												<Anchor point="RIGHT">
+													<Offset x="-40" y="0"/>
+												</Anchor>
+												<Anchor point="BOTTOM">
+													<Offset x="0" y="76"/>
+												</Anchor>
+											</Anchors>
+											<TexCoords left="0.0" right="1.0" top="0.0" bottom="1.0"/>
+										</Texture>
+										<Texture name="HotCTalentFrameBackgroundTopRight">
+											<Size x="44" y="256"/>
+											<Anchors>
+												<Anchor point="TOPRIGHT"/>
+												<Anchor point="BOTTOMLEFT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
+											</Anchors>
+											<TexCoords left="0.0" right="0.6875" top="0.0" bottom="1.0"/>
+										</Texture>
+										<Texture name="HotCTalentFrameBackgroundBottomLeft">
+											<Size x="256" y="75"/>
+											<Anchors>
+												<Anchor point="BOTTOMLEFT"/>
+												<Anchor point="TOPRIGHT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
+											</Anchors>
+											<TexCoords left="0.0" right="1.0" top="0.0" bottom="0.5859375"/>
+										</Texture>
+										<Texture name="HotCTalentFrameBackgroundBottomRight">
+											<Size x="44" y="75"/>
+											<Anchors>
+												<Anchor point="BOTTOMRIGHT"/>
+												<Anchor point="TOPLEFT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
+											</Anchors>
+											<TexCoords left="0.0" right="0.6875" top="0.0" bottom="0.5859375"/>
 										</Texture>
 									</Layer>
 								</Layers>
@@ -264,16 +279,16 @@
 					</Frame>
 				</Frames>
 			</Frame>
-			<Button name="$parentTab1" inherits="HotCTabTemplate" id="1" text="SPELLS | TALENTS">
+			<Button name="$parentTab1" inherits="HotCTabTemplate" id="1" text="CORE">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
 						<Offset>
-							<AbsDimension x="0" y="6.5"/>
+							<AbsDimension x="6" y="4.75"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 			</Button>
-			<Button name="$parentTab2" inherits="HotCTabTemplate" id="2" text="RE | SKILL CARDS">
+			<Button name="$parentTab2" inherits="HotCTabTemplate" id="2" text="AUGMENTS">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
 						<Offset>
@@ -282,11 +297,11 @@
 					</Anchor>
 				</Anchors>
 			</Button>
-			<Button name="$parentTab3" inherits="HotCTabTemplate" id="3" text="OVIERVIEW">
+			<Button name="$parentTab3" inherits="HotCTabTemplate" id="3" text="OVERVIEW">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="-15" y="2"/>
+							<AbsDimension x="-15" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
