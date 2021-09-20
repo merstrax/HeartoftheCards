@@ -8,7 +8,7 @@
 ## SavedVariables: HotcDB
 
 Tables\ClassDB.lua
-
-
 HotC.xml
-HotC.lua
+
+
+
