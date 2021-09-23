@@ -2,7 +2,7 @@
     
     <Script file="HotC_Template.lua"/>
     
-    <Button name="SpellButton" virtual="true" hidden="true">
+    <Button name="HotCSpellButtonTemplate" virtual="true" hidden="true">
 		<Size>
 			<AbsDimension x="32" y="32"/>
 		</Size>
@@ -24,8 +24,15 @@
 			<Layer level="BORDER">
 				<Texture name="$parentIcon" parentKey="icon">
 					<Size>
-						<AbsDimension x="32" y="32"/>
+						<AbsDimension x="30" y="30"/>
 					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
 				</Texture>
 			</Layer>
 		</Layers>
@@ -51,6 +58,7 @@
 				HotCTooltip:SetOwner(self, "ANCHOR_RIGHT");
 				HotCTooltip:SetHyperlink("spell:"..this.link);
 				HotCTooltip:AddLine(" ");
+				HotCTooltip:AddLine(this.costText);
 				HotCTooltip:AddLine("Requires Level: "..this.level);
 				HotCTooltip:Show();
 			</OnEnter>
@@ -60,7 +68,7 @@
 		</Scripts>
 	</Button>
 
-	<Button name="TalentButton" inherits="SpellButton" virtual="true" hidden="true">
+	<Button name="HotCTalentButton" inherits="HotCSpellButtonTemplate" virtual="true" hidden="true">
 		<Layers>
 			<Layer level="OVERLAY">
 				<Texture name="$parentRankBorder" file="Interface\TalentFrame\TalentFrame-RankBorder" parentKey="badge">
@@ -92,6 +100,35 @@
 			</OnClick>
 		</Scripts>
 	</Button>
+
+	<Frame name="HotCSpellButtonFrame" virtual="true" hidden="true">
+		<Size x="108" y="40" />
+		<Frames>
+			<Button name="$parentButton" inherits="HotCSpellButtonTemplate" parentKey="button" hidden="false">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT" x="4" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						UpdateSpellButton(self, button)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parentText" parentKey="text">
+				<Size x="64" y="40" />
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentButton" relativePoint="RIGHT" x="4" y="0" />
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentText" inherits="GameFontNormalSmall" text="Test Text" parentKey="text" justifyH="LEFT" wordwrap="true" maxlines="3">
+							<Size x="64" y="40"/>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Frame>
 
 	<Button name="HotCTabTemplate" virtual="true">
 		<Size>
@@ -165,10 +202,10 @@
 			</OnLoad>
 			<OnClick>
 				PanelTemplates_Tab_OnClick(self, HotCMainFrame);
+				HotCFrame_TabSelect(self);
 			</OnClick>
 			<OnShow>
 				PanelTemplates_TabResize(self, 0);
-				HotCFrame_TabBoundsCheck(self);
 			</OnShow>
 		</Scripts>
 		<ButtonText name="$parentText">
@@ -310,5 +347,177 @@
 				CloseDropDownMenus();
 			</OnHide>
 		</Scripts>
+	</Frame>
+
+	<Button name="HotCSubCatButton" virtual="true">
+		<Size>
+			<AbsDimension x="190" y="17"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentStripe" setAllPoints="true" parentKey="bg">
+					<Color a=".08" r="1" g="1" b="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture name="$parentIcon" parentKey="icon">
+					<Size>
+						<AbsDimension x="15" y="15"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" >
+							<Offset x="5" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentName" inherits="GameFontHighlightLeft" text="Spell Name" parentKey="name" bytes="20">
+					<Size>
+						<AbsDimension x="210" y="11"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentIcon" relativePoint="RIGHT">
+							<Offset x="11" y="0"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentRank" inherits="GameFontHighlightLeft" parentKey="rank">
+					<Size>
+						<AbsDimension x="25" y="11"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT">
+							<Offset x="-5" y="0"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture name="$parentHighlight" file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset x="3" y="-2"/>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT">
+					<Offset x="-3" y="2"/>
+				</Anchor>
+			</Anchors>
+			<TexCoords left="0" right="1" top="0.609375" bottom="0.796875"/>
+		</HighlightTexture>
+		<Scripts>
+			<OnClick>
+				PanelTemplates_Tab_OnClick(HotCMainFrameTab2, HotCMainFrame);
+				HotCFrame_TabSelect(2);
+				ShowSpellsForSpec(self.class, self.spec)
+				ShowTalentsForSpec(self.class, self.spec)
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="HotCCategoryButton" virtual="true">
+		<Size>
+			<AbsDimension x="190" y="17"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentStripe" setAllPoints="true">
+					<Color a=".08" r="1" g="1" b="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<FontString name="$parentName" inherits="GameFontHighlightLeft" text="Class : Spec" parentKey="title">
+					<Size>
+						<AbsDimension x="210" y="11"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset x="11" y="0"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentCategoryRight" file="Interface\TokenFrame\UI-TokenFrame-CategoryButton">
+					<Size>
+						<AbsDimension x="37" y="18"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.14453125" top="0.296875" bottom="0.578125"/>
+				</Texture>
+				<Texture name="$parentCategoryLeft" file="Interface\TokenFrame\UI-TokenFrame-CategoryButton">
+					<Size>
+						<AbsDimension x="256" y="18"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset x="0" y="0"/>
+						</Anchor>
+						<Anchor point="RIGHT" relativeTo="$parentCategoryRight" relativePoint="LEFT">
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.28125"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentExpandIcon" file="Interface\Buttons\UI-PlusMinus-Buttons" parentKey="expandIcon">
+					<Size>
+						<AbsDimension x="7" y="7"/>
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset x="-8" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<HighlightTexture name="$parentHighlight" file="Interface\TokenFrame\UI-TokenFrame-CategoryButton" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset x="3" y="-2"/>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT">
+					<Offset x="-3" y="2"/>
+				</Anchor>
+			</Anchors>
+			<TexCoords left="0" right="1" top="0.609375" bottom="0.796875"/>
+		</HighlightTexture>
+		<Scripts>
+			<OnLoad>
+				HotC_ExpanderSetup(self, false);
+			</OnLoad>
+			<OnClick>
+				HotC_Expander(self, not self.isExpanded);
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Frame name="HotCCategoryFrame" virtual="true">
+		<Size>
+			<AbsDimension x="190" y="17"/>
+		</Size>
+		<Frames>
+			<Button name="$parentButton" inherits="HotCCategoryButton" parentKey="button">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="$parentContainer" parentKey="container" hidden="true">
+				<Size x="190" y="10"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentButton" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
 	</Frame>
 </Ui>

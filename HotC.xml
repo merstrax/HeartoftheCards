@@ -5,9 +5,9 @@
 
 	<GameTooltip name="HotCTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true"/>
 
-	<Frame name="HotCMainFrame" parent="UIParent" hidden="false" toplevel="true" framestrata="FULLSCREEN">
+	<Frame name="HotCMainFrame" parent="UIParent" hidden="false" toplevel="true" framestrata="FULLSCREEN" enableMouse="true">
 		<Size>
-			<AbsDimension x="650" y="530"/>
+			<AbsDimension x="700" y="530"/>
 		</Size>
 		<Anchors>
  			<Anchor point="CENTER"/>
@@ -20,6 +20,40 @@
 							<Offset>
 								<AbsDimension x="0" y="-8"/>
 							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="TalentPointsText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="0/51">
+					<Size x="0" y="15"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+							<Offset x="-35" y="-7"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="TalentSpentText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="TE:">
+					<Size x="0" y="15"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+							<Offset x="-68" y="-7"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="AbilityPointsText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="0/60">
+					<Size x="0" y="15"/>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="TalentSpentText" relativePoint="LEFT">
+							<Offset x="-8" y="0"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="AbilitySpentText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="AE:">
+					<Size x="0" y="15"/>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="TalentSpentText" relativePoint="LEFT">
+							<Offset x="-41" y="0"/>
 						</Anchor>
 					</Anchors>
 				</FontString>
@@ -105,6 +139,39 @@
 					</Anchor>
 				</Anchors>
 			</Button>
+			<Button name="$parentSaveBuild" inherits="UIPanelButtonTemplate" text="Save Build">
+				<Size x="80" y="18" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentLoadBuild" inherits="UIPanelButtonTemplate" text="Load Build">
+				<Size x="80" y="18" />
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentSaveBuild" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="10" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentResetBuild" inherits="UIPanelButtonTemplate" text="Reset Build">
+				<Size x="80" y="18" />
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentLoadBuild" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="10" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick function="ResetBuild" />
+				</Scripts>
+			</Button>
 			
 			<!--
 				This is the View Frame. 
@@ -112,7 +179,7 @@
 			-->
 			<Frame name="$parentViewFrame" hidden="false" parentKey="viewFrame" enableMouse="true">
 				<Size>
-					<AbsDimension x="630" y="480"/>
+					<AbsDimension x="680" y="480"/>
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent">
@@ -123,9 +190,9 @@
 				</Anchors>
 				
 				<Frames>
-					<Frame name="$parentClassFrame" hidden="false" parentKey="classFrame">
+					<Frame name="$parentClassFrame" hidden="true" parentKey="classFrame">
 						<Size>
-							<AbsDimension x="630" y="480"/>
+							<AbsDimension x="680" y="480"/>
 						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
@@ -140,7 +207,7 @@
 							</Anchor>
 						</Anchors>
 						<Frames>
-							<Frame name="$parentNavBar" hidden="false" parentKey="navBar">
+							<Frame name="HotCNavBar" hidden="false" parentKey="navBar">
 								<Size x="64" y="32" />
 								<Anchors>
 									<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
@@ -154,57 +221,106 @@
 										</Offset>
 									</Anchor>
 								</Anchors>
-								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
-									<EdgeSize><AbsValue val="5"/></EdgeSize>
-									<TileSize><AbsValue val="5"/></TileSize>
-									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
-								</Backdrop>
-								<Layers>
-									<Layer level="BACKGROUND">
-										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
-											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" x="0" y="0"/></Anchors>
-										</Texture>
-									</Layer>
-									<Layer level="ARTWORK">
-										<FontString name="TalentPointsText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="0/51">
-											<Size x="0" y="15"/>
-											<Anchors>
-												<Anchor point="RIGHT">
-													<Offset x="-12" y="1"/>
-												</Anchor>
-											</Anchors>
-										</FontString>
-										<FontString name="TalentSpentText" inherits="GameFontNormalSmall" justifyH="RIGHT" text="TE:">
-											<Size x="0" y="15"/>
-											<Anchors>
-												<Anchor point="RIGHT" >
-													<Offset x="-45" y="1"/>
-												</Anchor>
-											</Anchors>
-										</FontString>
-									</Layer>
-								</Layers>
+								<Frames>
+									<Button name="$parentTab1" inherits="TabButtonTemplate" id="1" text="Spec 1">
+										<Anchors>
+											<Anchor point="BOTTOMLEFT" relativeTo="HotCTalentFrame" relativePoint="TOPLEFT">
+												<Offset>
+													<AbsDimension x="6" y="-5"/>
+												</Offset>
+											</Anchor>
+										</Anchors>
+										<Scripts>
+											<OnLoad>
+												PanelTemplates_TabResize(self, 0);
+												_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
+											</OnLoad>
+											<OnClick>
+												PanelTemplates_SetTab(HotCNavBar, self:GetID());
+												ShowClassFrame(HotCclassSelected, SpecTable2[HotCclassSelected][self:GetID()])
+											</OnClick>
+											<OnUpdate>
+												_G[self:GetName()]:SetText(SpecTable2[HotCclassSelected][self:GetID()]);
+												PanelTemplates_TabResize(self, 0);
+												_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
+												self:SetPoint("BOTTOMLEFT", HotCTalentFrame, "TOPLEFT", 6, -2);
+											</OnUpdate>
+										</Scripts>
+									</Button>
+									<Button name="$parentTab2" inherits="TabButtonTemplate" id="2" text="Spec 2">
+										<Anchors>
+											<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+												<Offset>
+													<AbsDimension x="0" y="0"/>
+												</Offset>
+											</Anchor>
+										</Anchors>
+										<Scripts>
+											<OnLoad>
+												PanelTemplates_TabResize(self, 0);
+												_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
+											</OnLoad>
+											<OnClick>
+												PanelTemplates_SetTab(HotCNavBar, self:GetID());
+												ShowClassFrame(HotCclassSelected, SpecTable2[HotCclassSelected][self:GetID()])
+											</OnClick>
+											<OnUpdate>
+												_G[self:GetName()]:SetText(SpecTable2[HotCclassSelected][self:GetID()]);
+												PanelTemplates_TabResize(self, 0);
+												_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
+											</OnUpdate>
+										</Scripts>
+									</Button>
+									<Button name="$parentTab3" inherits="TabButtonTemplate" id="3" text="Spec 3">
+										<Anchors>
+											<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
+												<Offset>
+													<AbsDimension x="0" y="0"/>
+												</Offset>
+											</Anchor>
+										</Anchors>
+										<Scripts>
+											<OnLoad>
+												PanelTemplates_TabResize(self, 0);
+												_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
+											</OnLoad>
+											<OnClick>
+												PanelTemplates_SetTab(HotCNavBar, self:GetID());
+												ShowClassFrame(HotCclassSelected, SpecTable2[HotCclassSelected][self:GetID()])
+											</OnClick>
+											<OnUpdate>
+												_G[self:GetName()]:SetText(SpecTable2[HotCclassSelected][self:GetID()]);
+												PanelTemplates_TabResize(self, 0);
+												_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
+											</OnUpdate>
+										</Scripts>
+									</Button>
+								</Frames>
+								<Scripts>
+									<OnLoad>
+										PanelTemplates_SetNumTabs(self, 3)
+										PanelTemplates_SetTab(self, 1)
+									</OnLoad>
+									<OnShow>
+										
+									</OnShow>
+								</Scripts>
 							</Frame>
 							<Frame name="SpellFrame" hidden="false" parentKey="spellFrame">
 								<Size>
-									<AbsDimension x="300" y="435"/>
+									<AbsDimension x="340" y="435"/>
 								</Size>
 								<Anchors>
-									<Anchor point="TOPLEFT" relativeTo="$parentNavBar" relativePoint="BOTTOMLEFT">
+									<Anchor point="TOPLEFT" relativeTo="HotCNavBar" relativePoint="BOTTOMLEFT">
 										<Offset>
 											<AbsDimension x="0" y="-10"/>
 										</Offset>
 									</Anchor>
 								</Anchors>
-								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
-									<EdgeSize><AbsValue val="5"/></EdgeSize>
-									<TileSize><AbsValue val="5"/></TileSize>
-									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
-								</Backdrop>
 								<Layers>
 									<Layer level="BACKGROUND">
 										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Paper" parentKey="bg">
-											<Size x="392" y="495" />
+											<Size x="443" y="500" />
 											<Anchors>
 												<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
 													<AbsDimension x="0" y="-5"/>
@@ -214,72 +330,235 @@
 									</Layer>
 								</Layers>
 							</Frame>
-							<Frame name="$parentTalentFrame" hidden="false" parentKey="talentFrame">
+							<Frame name="HotCTalentFrame" hidden="false" parentKey="talentFrame">
 								<Size>
-									<AbsDimension x="300" y="435"/>
+									<AbsDimension x="325" y="440"/>
 								</Size>
 								<Anchors>
-									<Anchor point="TOPRIGHT" relativeTo="$parentNavBar" relativePoint="BOTTOMRIGHT">
+									<Anchor point="TOPRIGHT" relativeTo="HotCNavBar" relativePoint="BOTTOMRIGHT">
 										<Offset>
-											<AbsDimension x="0" y="-10"/>
+											<AbsDimension x="5" y="-8"/>
 										</Offset>
 									</Anchor>
 								</Anchors>
+								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border">
+									<EdgeSize><AbsValue val="20"/></EdgeSize>
+								</Backdrop>
+								<Frames>
+									<Frame name="$parentBG">
+										<Size>
+											<AbsDimension x="310" y="425"/>
+										</Size>
+										<Anchors>
+											<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+												<Offset>
+													<AbsDimension x="-7" y="-7"/>
+												</Offset>
+											</Anchor>
+										</Anchors>
+										<Layers>
+											<Layer level="BACKGROUND">
+												<Texture name="HotCTalentFrameBackgroundTopLeft">
+													<Size x="256" y="256"/>
+													<Anchors>
+														<Anchor point="TOPLEFT"/>
+														<Anchor point="RIGHT">
+															<Offset x="-40" y="0"/>
+														</Anchor>
+														<Anchor point="BOTTOM">
+															<Offset x="0" y="76"/>
+														</Anchor>
+													</Anchors>
+													<TexCoords left="0.0" right="1.0" top="0.0" bottom="1.0"/>
+												</Texture>
+												<Texture name="HotCTalentFrameBackgroundTopRight">
+													<Size x="44" y="256"/>
+													<Anchors>
+														<Anchor point="TOPRIGHT"/>
+														<Anchor point="BOTTOMLEFT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
+													</Anchors>
+													<TexCoords left="0.0" right="0.6875" top="0.0" bottom="1.0"/>
+												</Texture>
+												<Texture name="HotCTalentFrameBackgroundBottomLeft">
+													<Size x="256" y="75"/>
+													<Anchors>
+														<Anchor point="BOTTOMLEFT"/>
+														<Anchor point="TOPRIGHT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
+													</Anchors>
+													<TexCoords left="0.0" right="1.0" top="0.0" bottom="0.5859375"/>
+												</Texture>
+												<Texture name="HotCTalentFrameBackgroundBottomRight">
+													<Size x="44" y="75"/>
+													<Anchors>
+														<Anchor point="BOTTOMRIGHT"/>
+														<Anchor point="TOPLEFT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
+													</Anchors>
+													<TexCoords left="0.0" right="0.6875" top="0.0" bottom="0.5859375"/>
+												</Texture>
+											</Layer>
+										</Layers>
+									</Frame>
+								</Frames>
+							</Frame>
+						</Frames>
+					</Frame>
+
+					<Frame name="$parentSummaryFrame" hidden="false" parentKey="summaryFrame">
+						<Size>
+							<AbsDimension x="680" y="480"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="4" y="0"/>
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-4" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<ScrollFrame name="$parentSpellList" inherits="UIPanelScrollFrameTemplate">
+								<Size x="200" y="450" />
 								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
 									<EdgeSize><AbsValue val="5"/></EdgeSize>
 									<TileSize><AbsValue val="5"/></TileSize>
 									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
 								</Backdrop>
 								<Layers>
-									<Layer level="BACKGROUND">
-										<Texture name="$parentBG" file="Interface\Addons\HotC\Resources\UI-Background-Rock" parentKey="bg">
-											<Anchors><Anchor point="TOPLEFT" x="0" y="0"/><Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0"/></Anchors>
-										</Texture>
-										<Texture name="HotCTalentFrameBackgroundTopLeft">
-											<Size x="256" y="256"/>
+									<Layer level="ARTWORK">
+										<FontString name="$parentTitle" inherits="GameFontNormal" text=" SPELLS ">
+											<Size x="0" y="15"/>
 											<Anchors>
-												<Anchor point="TOPLEFT"/>
-												<Anchor point="RIGHT">
-													<Offset x="-40" y="0"/>
-												</Anchor>
-												<Anchor point="BOTTOM">
-													<Offset x="0" y="76"/>
+												<Anchor point="TOP">
+													<Offset x="0" y="15"/>
 												</Anchor>
 											</Anchors>
-											<TexCoords left="0.0" right="1.0" top="0.0" bottom="1.0"/>
-										</Texture>
-										<Texture name="HotCTalentFrameBackgroundTopRight">
-											<Size x="44" y="256"/>
-											<Anchors>
-												<Anchor point="TOPRIGHT"/>
-												<Anchor point="BOTTOMLEFT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
-											</Anchors>
-											<TexCoords left="0.0" right="0.6875" top="0.0" bottom="1.0"/>
-										</Texture>
-										<Texture name="HotCTalentFrameBackgroundBottomLeft">
-											<Size x="256" y="75"/>
-											<Anchors>
-												<Anchor point="BOTTOMLEFT"/>
-												<Anchor point="TOPRIGHT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
-											</Anchors>
-											<TexCoords left="0.0" right="1.0" top="0.0" bottom="0.5859375"/>
-										</Texture>
-										<Texture name="HotCTalentFrameBackgroundBottomRight">
-											<Size x="44" y="75"/>
-											<Anchors>
-												<Anchor point="BOTTOMRIGHT"/>
-												<Anchor point="TOPLEFT" relativeTo="HotCTalentFrameBackgroundTopLeft" relativePoint="BOTTOMRIGHT"/>
-											</Anchors>
-											<TexCoords left="0.0" right="0.6875" top="0.0" bottom="0.5859375"/>
-										</Texture>
+										</FontString>
 									</Layer>
 								</Layers>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+										<Offset>
+											<AbsDimension x="5" y="-25"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<ScrollChild>
+									<Frame name="$parentScrollChild" parentKey="child">
+										<Size x="200" y="450"/>
+										<Anchors>
+											<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT" x="20" y="0"/>
+										</Anchors>
+									</Frame>
+								</ScrollChild>
+							</ScrollFrame>
+
+							<ScrollFrame name="$parentTalentList" inherits="UIPanelScrollFrameTemplate">
+								<Size x="200" y="450" />
+								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
+									<EdgeSize><AbsValue val="5"/></EdgeSize>
+									<TileSize><AbsValue val="5"/></TileSize>
+									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
+								</Backdrop>
+								<Layers>
+									<Layer level="ARTWORK">
+										<FontString name="$parentTitle" inherits="GameFontNormal" text=" TALENTS ">
+											<Size x="0" y="15"/>
+											<Anchors>
+												<Anchor point="TOP">
+													<Offset x="0" y="15"/>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+								<Anchors>
+									<Anchor point="LEFT" relativeTo="$parentSpellList" relativePoint="RIGHT">
+										<Offset>
+											<AbsDimension x="25" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<ScrollChild>
+									<Frame name="$parentScrollChild" parentKey="child">
+										<Size x="200" y="450"/>
+										<Anchors>
+											<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT" x="20" y="0"/>
+										</Anchors>
+									</Frame>
+								</ScrollChild>
+							</ScrollFrame>
+
+							<ScrollFrame name="$parentREList" inherits="UIPanelScrollFrameTemplate">
+								<Size x="190" y="215" />
+								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
+									<EdgeSize><AbsValue val="5"/></EdgeSize>
+									<TileSize><AbsValue val="5"/></TileSize>
+									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
+								</Backdrop>
+								<Layers>
+									<Layer level="ARTWORK">
+										<FontString name="$parentTitle" inherits="GameFontNormal" text=" MYSTIC ENCHANTS ">
+											<Size x="0" y="15"/>
+											<Anchors>
+												<Anchor point="TOP">
+													<Offset x="0" y="15"/>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="$parentTalentList" relativePoint="TOPRIGHT">
+										<Offset>
+											<AbsDimension x="25" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<ScrollChild>
+									<Frame name="$parentScrollChild" parentKey="child">
+										<Size x="190" y="215"/>
+										<Anchors>
+											<Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT" x="20" y="0"/>
+										</Anchors>
+									</Frame>
+								</ScrollChild>
+							</ScrollFrame>
+							<Frame name="$parentSkillCards">
+								<Size x="190" y="215" />
+								<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true" alphaMode="BLEND">
+									<EdgeSize><AbsValue val="5"/></EdgeSize>
+									<TileSize><AbsValue val="5"/></TileSize>
+									<BackgroundInsets><AbsInset left="4" right="5" top="5" bottom="4"/></BackgroundInsets>
+								</Backdrop>
+								<Layers>
+									<Layer level="ARTWORK">
+										<FontString name="$parentTitle" inherits="GameFontNormal" text=" SKILL CARDS ">
+											<Size x="0" y="15"/>
+											<Anchors>
+												<Anchor point="TOP">
+													<Offset x="0" y="15"/>
+												</Anchor>
+											</Anchors>
+										</FontString>
+									</Layer>
+								</Layers>
+								<Anchors>
+									<Anchor point="TOPLEFT" relativeTo="$parentREList" relativePoint="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="-20"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
 							</Frame>
 						</Frames>
 					</Frame>
 				</Frames>
 			</Frame>
-			<Button name="$parentTab1" inherits="HotCTabTemplate" id="1" text="CORE">
+			<Button name="$parentTab1" inherits="HotCTabTemplate" id="1" text="Overview">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
 						<Offset>
@@ -287,8 +566,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						PanelTemplates_Tab_OnClick(self, HotCMainFrame);
+						HotCFrame_TabSelect(self:GetID());
+						ShowBuildOverview();
+					</OnClick>
+				</Scripts>
 			</Button>
-			<Button name="$parentTab2" inherits="HotCTabTemplate" id="2" text="AUGMENTS">
+			<Button name="$parentTab2" inherits="HotCTabTemplate" id="2" text="Class">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
 						<Offset>
@@ -296,8 +582,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						PanelTemplates_Tab_OnClick(self, HotCMainFrame);
+						HotCFrame_TabSelect(self:GetID());
+						ShowClassFrame(HotCclassSelected, HotCspecSelected)
+					</OnClick>
+				</Scripts>
 			</Button>
-			<Button name="$parentTab3" inherits="HotCTabTemplate" id="3" text="OVERVIEW">
+			<Button name="$parentTab3" inherits="HotCTabTemplate" id="3" text="Augments">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentTab2" relativePoint="RIGHT">
 						<Offset>
@@ -320,6 +613,9 @@
 			<OnLoad>
 				OnLoad(self);
 			</OnLoad>
+			<OnShow>
+				PanelTemplates_SetTab(self, 1)
+			</OnShow>
 		</Scripts>
 	</Frame>
 </Ui>

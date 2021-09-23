@@ -1,6 +1,6 @@
 SpecTable = {
 	[1] = {"DRUID", {"BALANCE", "FERAL", "RESTORATION"}},
-	[2] = {"HUNTER", {"BEASTMASTERY", "MARKSMANSHIP", "SURVIVAL"}},
+	[2] = {"HUNTER", {"BEASTMASTER", "MARKSMAN", "SURVIVAL"}},
 	[3] = {"MAGE", {"ARCANE", "FIRE", "FROST"}},
 	[4] = {"PALADIN", {"HOLY", "PROTECTION", "RETRIBUTION"}},
 	[5] = {"PRIEST", {"DISCIPLINE", "HOLY", "SHADOW"}},
@@ -10,9 +10,9 @@ SpecTable = {
 	[9] = {"WARRIOR", {"ARMS", "FURY", "PROTECTION"}},
 }
 
-SpecBG = {
+SpecTable2 = {
 	["DRUID"] = {"BALANCE", "FERAL", "RESTORATION"},
-	["HUNTER"] = {"BEASTMASTERY", "MARKSMANSHIP", "SURVIVAL"},
+	["HUNTER"] = {"BEASTMASTER", "MARKSMAN", "SURVIVAL"},
 	["MAGE"] = {"ARCANE", "FIRE", "FROST"},
 	["PALADIN"] = {"HOLY", "PROTECTION", "RETRIBUTION"},
 	["PRIEST"] = {"DISCIPLINE", "HOLY", "SHADOW"},
@@ -97,7 +97,7 @@ Class_DB = {
 				{22570, 62, }, {9005, 36, }, {22842, 36, }, {768, 20, }, {779, 1, }, {5209, 28, }, {5215, 20, }, {5217, 24, }, {783, 20, }, {1822, 24, }, {1066, 16, }, {1079, 20, }, {99, 1, }, {1082, 20, }, {1850, 26, }, 
 				{62600, 20, }, {33745, 60, }, {5487, 1, }, {16857, 18, }, {22568, 32, }, {62078, 20, }, {5221, 22, }, {6795, 1, }, {6785, 32, }, {52610, 75, }, {6807, 1, }, {33943, 70, }, {8998, 28, }, {5229, 10, }, {5211, 12, }, 
 			},
-			File = "Interface\\TALENTFRAME\\DruidFeral";
+			File = "Interface\\TALENTFRAME\\DruidFeralCombat";
 		},
 		["BALANCE"] = {
 			["Talents"] = {
@@ -172,7 +172,7 @@ Class_DB = {
 				{801494, 10, }, {34477, 70, }, {19883, 10, }, {60192, 80, }, {1499, 20, }, {1495, 1, }, {781, 20, }, {19263, 60, }, {13813, 34, }, {13809, 28, }, {13795, 16, }, {19885, 24, }, {5384, 30, }, {2973, 1, }, {2974, 12, }, {34600, 68, }, },
 				File = "Interface\\TALENTFRAME\\HunterSurvival";
 			},
-		["MARKSMANSHIP"] = {	
+		["MARKSMAN"] = {	
 			["Talents"] = {
 				{8, 3, {53228, 53232, }, }, 
 				{9, 3, {53221, 53222, 53224, }, }, 
@@ -207,7 +207,7 @@ Class_DB = {
 				File = "Interface\\TALENTFRAME\\HunterMarksmanship";
 			},
 			
-		["BEASTMASTERY"] = {
+		["BEASTMASTER"] = {
 			["Talents"] = {
 				{9, 3, {53256, 53259, 53260, }, }, 
 				{11, 2, {53270, }, }, 
@@ -237,7 +237,7 @@ Class_DB = {
 				{9, 2, {34692, 834692, }, }, 
 			},
 			["Spells"] = {
-				{1513, 14, }, {13161, 30, }, {13165, 1, }, {53271, 75, }, {6197, 14, }, {136, 12, }, {20043, 46, }, {13163, 1, }, {13159, 40, }, {62757, 80, }, {5118, 10, }, {61846, 74, }, {965200, 1, }, {1002, 14, }, {34026, 66, }, {34074, 20, }, 
+				{1513, 14, }, {13161, 30, }, {13165, 1, }, {53271, 75, }, {6197, 14, }, {136, 12, }, {20043, 46, }, {13163, 1, }, {13159, 40, }, {62757, 80, }, {5118, 10, }, {61846, 74, }, {965200, 1, 6, }, {1002, 14, }, {34026, 66, }, {34074, 20, }, 
 			},
 			File = "Interface\\TALENTFRAME\\HunterBeastmastery";
 		},
